@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -38,7 +39,7 @@ public class UserMapperTest {
         SqlSession sqlSession = MybatisUtils.getSqlSession();
 
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
-        User user = mapper.gerUser(1);
+        User user = mapper.getUserById(1);
         System.out.println(user);
 
         sqlSession.close();
@@ -65,7 +66,7 @@ public class UserMapperTest {
         sqlSession.commit();
         sqlSession.close();
     }
-    
+
     @Test
     public void delUser() {
         SqlSession sqlSession = MybatisUtils.getSqlSession();
@@ -74,6 +75,37 @@ public class UserMapperTest {
         mapper.delUser(2);
 
         sqlSession.commit();
+        sqlSession.close();
+    }
+
+    //  使用map 修改
+    @Test
+    public void updateUserByMap() {
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("userId", 1);
+        map.put("name", "44");
+
+        mapper.updateUserByMap(map);
+
+        sqlSession.commit();
+        sqlSession.close();
+    }
+
+    // 模糊查询
+    @Test
+    public void getUserByLike() {
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        List<User> userList = mapper.getUserByLike("%45% or 1=1");
+
+        for (User user : userList) {
+            System.out.println(user);
+        }
+
         sqlSession.close();
     }
 }

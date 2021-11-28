@@ -8,7 +8,7 @@
         select * from "user"
     </select>
 
-    <select id="gerUser" resultType="com.klover.pojo.User" parameterType="int">
+    <select id="getUserById" resultType="com.klover.pojo.User" parameterType="int">
         SELECT * FROM "user" where "id" = #{id}
     </select>
 
@@ -23,4 +23,12 @@
     <delete id="delUser" parameterType="int">
         delete from "user" where id = #{id}
     </delete>
+
+    <update id="updateUserByMap" parameterType="map">
+        update "user" set "name" = #{name}  where id = #{userId};
+    </update>
+    
+    <select id="getUserByLike" parameterType="string" resultType="com.klover.pojo.User">
+        select * from "user" where "name" like #{name};
+    </select>
 </mapper>

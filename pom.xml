@@ -12,6 +12,7 @@
     <!-- 子模块 -->
     <modules>
         <module>mybatis-01</module>
+        <module>mybatis-02</module>
     </modules>
     <!-- 导入依赖 -->
     <dependencies>

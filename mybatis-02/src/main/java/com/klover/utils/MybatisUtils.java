@@ -12,7 +12,7 @@ public class MybatisUtils {
     private static SqlSessionFactory sqlSessionFactory;
 
     static {
-        String resource = "myBatis-config.xml";
+        String resource = "mybatis-config.xml";
         InputStream inputStream = null;
         try {
             inputStream = Resources.getResourceAsStream(resource);

@@ -10,6 +10,7 @@
         <setting name="logImpl" value="LOG4J"/>
     </settings>
     <typeAliases>
+        <!-- 将包内的映射器接口实现全部注册为映射器 -->
         <package name="com.klover.entity"/>
     </typeAliases>
     <environments default="development">
@@ -24,6 +25,8 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="com/klover/mapper/UserMapper.xml"></mapper>
+<!--        <mapper resource="com/klover/mapper/UserMapper.xml"></mapper>-->
+        <!-- 将包内的映射器接口实现全部注册为映射器 -->
+        <package name="com.klover.mapper"/>
     </mappers>
 </configuration>

@@ -19,4 +19,28 @@ public class GoodsMapperTest {
 
         sqlSession.close();
     }
+
+    @Test
+    public void getGoodsAndUserList1() {
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        GoodsMapper mapper = sqlSession.getMapper(GoodsMapper.class);
+        List<Goods> goodsAndUserList1 = mapper.getGoodsAndUserList1();
+
+        for (Goods goods : goodsAndUserList1) {
+            System.out.println(goods);
+        }
+        sqlSession.close();
+    }
+
+    @Test
+    public void getGoodsAndUserList2() {
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        GoodsMapper mapper = sqlSession.getMapper(GoodsMapper.class);
+        List<Goods> goodsAndUserList1 = mapper.getGoodsAndUserList2();
+
+        for (Goods goods : goodsAndUserList1) {
+            System.out.println(goods);
+        }
+        sqlSession.close();
+    }
 }

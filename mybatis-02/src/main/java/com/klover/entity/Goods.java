@@ -8,4 +8,5 @@ public class Goods {
     private String name;
     private float amount;
     private int userId;
+    private User user;
 }

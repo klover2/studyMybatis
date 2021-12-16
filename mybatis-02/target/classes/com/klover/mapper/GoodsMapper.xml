@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.klover.mapper.GoodsMapper">
-    <!--1.结构映射 -->
+    <!--1.子域查询 -->
     <select id="getGoodsAndUserList1" resultMap="goodsAndUser1">
         select * from "goods";
     </select>

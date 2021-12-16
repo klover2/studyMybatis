@@ -43,4 +43,30 @@ public class UserMapperTest {
 
         sqlSession.close();
     }
+    
+    @Test
+    public void getUserGoodsById1() {
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        List<User> goods = mapper.getUserGoodsById1(1);
+
+        for (User good : goods) {
+            System.out.println(good);
+        }
+
+        sqlSession.close();
+    }
+
+    @Test
+    public void getUserGoodsById2() {
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        List<User> goods = mapper.getUserGoodsById2(1);
+
+        for (User good : goods) {
+            System.out.println(good);
+        }
+
+        sqlSession.close();
+    }
 }

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.klover.mapper.GoodsMapper">
+    <!--1.子域查询 -->
+    <select id="getGoodsAndUserList1" resultMap="goodsAndUser1">
+        select * from "goods";
+    </select>
+
+    <resultMap id="goodsAndUser1" type="goods">
+        <!-- 简单字段可以不需要映射-->
+        <association property="user" column="userId" javaType="user" select="getUser" />
+    </resultMap>
+    
+    <select id="getUser" resultType="user">
+        select * from "user" where id = #{userId};
+    </select>
+    <!--2. 结果映射 -->
+    <select id="getGoodsAndUserList2" resultMap="goodsAndUser2">
+        SELECT
+            goods.ID goodsId,
+            goods.amount,
+            goods."name" goodsName,
+            "user"."id" userId,
+            "user"."name" userName,
+            "user"."time",
+            "user"."age"
+        FROM
+            goods goods
+                LEFT JOIN "user" "user" ON "user".ID = goods."userId"
+    </select>
+    <resultMap id="goodsAndUser2" type="goods">
+        <result property="id" column="goodsId"></result>
+        <result property="amount" column="amount"></result>
+        <result property="name" column="goodsName"></result>
+        <association property="user" javaType="user">
+            <result property="id" column="userId"></result>
+            <result property="name" column="userName"></result>
+            <result property="time" column="time"></result>
+            <result property="age" column="age"></result>
+        </association>
+    </resultMap>
+</mapper>

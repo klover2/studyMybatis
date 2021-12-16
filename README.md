@@ -1,2 +1,2 @@
 # studyMybatis
-练习mybatis
+练习mybatis3

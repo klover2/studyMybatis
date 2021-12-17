@@ -14,4 +14,13 @@ public interface UserMapper {
 
     // 获取用户和用户下商品信息
     List<User> getUserGoodsById2(@Param("userId") int id);
+
+    // 动态sql if
+    List<User> getUserListByIf(Map map);
+
+    // 动态sql set
+    int updateUser(Map<String, Object> map);
+
+    // 动态sql choose、when、otherwise
+    List<User> getUserByChoose(Map<String, Object> map);
 }

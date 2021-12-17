@@ -41,4 +41,47 @@
             <result column="amount" property="amount"></result>
         </collection>
     </resultMap>
+
+    <!--动态sql if -->
+    <select id="getUserListByIf" resultType="user">
+        select * from "user"
+        <where>
+            <if test="id != null">
+                And id = #{id}
+            </if>
+        </where>
+    </select>
+
+    <!-- 动态sql set -->
+    <update id="updateUser" >
+        update "user"
+        <set>
+            <if test="time != null">
+                time = #{time},
+            </if>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="age != null">
+                age = #{age},
+            </if>
+        </set>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+
+    <select id="getUserByChoose" resultType="user">
+        select * from "user"
+        <where>
+            <choose>
+                <when test="name != null">
+                    and name like #{name}
+                </when>
+                <otherwise>
+                    and id = #{id}
+                </otherwise>
+            </choose>
+        </where>
+    </select>
 </mapper>

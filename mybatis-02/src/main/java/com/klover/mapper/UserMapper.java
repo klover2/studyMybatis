@@ -23,4 +23,7 @@ public interface UserMapper {
 
     // 动态sql choose、when、otherwise
     List<User> getUserByChoose(Map<String, Object> map);
+
+    // 动态sql foreach 和 抽取公共sql 测试
+    List<User> getUserByForeach(@Param("ids") int[] ids);
 }

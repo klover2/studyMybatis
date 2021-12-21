@@ -117,4 +117,18 @@ public class UserMapperTest {
 
         sqlSession.close();
     }
+
+    @Test
+    public void getUserByForeach() {
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        int[] ids = new int[]{1};
+        List users = mapper.getUserByForeach(ids);
+
+        for (Object user : users) {
+            System.out.println(user);
+        }
+
+        sqlSession.close();
+    }
 }

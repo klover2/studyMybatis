@@ -4,31 +4,44 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.klover.mapper.UserMapper">
     <select id="getUserList" resultType="user">
-        select * from "user";
+        select *
+        from "user";
     </select>
     <select id="gerUserListPagination" resultType="user" parameterType="hashmap">
-        select * from "user" offset #{offset} limit #{limit};
+        select *
+        from "user" offset #{offset} limit #{limit};
     </select>
 
     <!--1. 子域查询 -->
     <select id="getUserGoodsById1" resultMap="getUserGoodsById1">
         select *
-        from "user" where id = #{userId};
+        from "user"
+        where id = #{userId};
     </select>
 
     <resultMap id="getUserGoodsById1" type="user">
-        <collection property="goodsList" javaType="arraylist" ofType="goods" select="getGoods1" column="id"></collection>
+        <collection property="goodsList" javaType="arraylist" ofType="goods" select="getGoods1"
+                    column="id"></collection>
     </resultMap>
-    
+
     <select id="getGoods1" resultType="goods">
         select *
-        from goods where "userId" = #{userId};
+        from goods
+        where "userId" = #{userId};
     </select>
 
     <!--2. 结果查询 -->
     <select id="getUserGoodsById2" resultMap="getUserGoodsById2">
-        SELECT "user".id userId, "user"."name" userName, "user".age, "user"."time", goods."id" goodsId, goods."name" goodsName, goods.amount
-        from "user" LEFT JOIN goods on "user".id = goods."id" where "user"."id" = 1
+        SELECT "user".id     userId,
+               "user"."name" userName,
+               "user".age,
+               "user"."time",
+               goods."id"    goodsId,
+               goods."name"  goodsName,
+               goods.amount
+        from "user"
+                 LEFT JOIN goods on "user".id = goods."id"
+        where "user"."id" = 1
     </select>
     <resultMap id="getUserGoodsById2" type="user">
         <result column="userId" property="id"></result>
@@ -53,7 +66,7 @@
     </select>
 
     <!-- 动态sql set -->
-    <update id="updateUser" >
+    <update id="updateUser">
         update "user"
         <set>
             <if test="time != null">
@@ -84,4 +97,19 @@
             </choose>
         </where>
     </select>
+
+    <select id="getUserByForeach" resultType="user">
+        select * from "user"
+        <where>
+            <include refid="testSql"></include>
+        </where>
+    </select>
+
+    <!--抽取公共sql -->
+    <sql id="testSql">
+        id in
+        <foreach collection="ids" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </sql>
 </mapper>
